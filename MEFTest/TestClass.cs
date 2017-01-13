@@ -49,7 +49,7 @@ namespace MEFTest
     [Export(typeof(ICalculator))]
     class MySimpleCalculator : ICalculator
     {
-        [ImportMany]
+        [ImportMany]//Lazy<T, TMetadata>是由MEF提供的，被定义在程序集System.ComponentModel.Composition中
         IEnumerable<Lazy<IOperation, IOperationData>> operations;
 
         public String Calculate(String input)
@@ -80,6 +80,12 @@ namespace MEFTest
             return "Operation Not Found!";
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="s"></param>
+        /// <remarks>目的在与找到计算表达式的符号，如：找1+1中的+</remarks>
+        /// <returns></returns>
         private int FindFirstNonDigit(String s)
         {
 
